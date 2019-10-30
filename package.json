@@ -1,0 +1,46 @@
+{
+  "name": "task-my-wife",
+  "version": "0.0.1",
+  "description": "Task management app",
+  "main": "app.js",
+  "private": true,
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-history-api-fallback": "^2.2.1",
+    "morgan": "~1.9.1",
+    "sha256": "^0.2.0",
+    "sqlite3": "^4.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.0.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^1.7.0"
+  },
+  "scripts": {
+    "start": "NODE_ENV=development node ./bin/www",
+    "test": "jest --passWithNoTests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaocarmo/task-my-wife.git"
+  },
+  "keywords": [
+    "task",
+    "manager"
+  ],
+  "author": "Joao Carmo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joaocarmo/task-my-wife/issues"
+  },
+  "homepage": "https://github.com/joaocarmo/task-my-wife#readme"
+}
