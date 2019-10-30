@@ -7,27 +7,56 @@
   "directories": {
     "lib": "lib"
   },
+  "scripts": {
+    "clean": "rm -rf public/",
+    "start": "NODE_ENV=development webpack-dev-server --mode development --port 3000",
+    "build": "NODE_ENV=production webpack --mode production",
+    "server": "NODE_ENV=development DEBUG=task-my-wife:* PORT=5000 node ./bin/www",
+    "test": "jest --passWithNoTests"
+  },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-history-api-fallback": "^2.2.1",
     "morgan": "~1.9.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-router-dom": "^5.1.2",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.88.1",
     "sha256": "^0.2.0",
     "sqlite3": "^4.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "core-js": "^3.3.5",
+    "css-loader": "^3.2.0",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^23.0.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
-    "eslint-plugin-react-hooks": "^1.7.0"
-  },
-  "scripts": {
-    "start": "NODE_ENV=development DEBUG=task-my-wife:* node ./bin/www",
-    "test": "jest --passWithNoTests"
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "file-loader": "^4.2.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.13.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "terser-webpack-plugin": "^2.2.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.9.0"
   },
   "repository": {
     "type": "git",

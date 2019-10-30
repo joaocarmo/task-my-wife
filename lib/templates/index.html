@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+  <style type="text/css">
+    body {
+      margin: 0;
+    }
+    .pretty-message {
+      width: 50vw;
+      margin: 0 auto;
+      margin-top: 120px;
+      padding-top: 6em;
+      border: dotted 1px lightblue;
+      border-radius: 4px;
+      padding: 2em;
+    }
+
+    .loader:empty {
+      height: 4px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .loader:empty:before{
+      display: block;
+      position: absolute;
+      content: "";
+      left: -200px;
+      width: 200px;
+      height: 2px;
+      background-color: #2980b9;
+      animation: loading 2s linear infinite;
+    }
+
+    @keyframes loading {
+      from {left: -200px; width: 30%;}
+      50% {width: 30%;}
+      70% {width: 70%;}
+      80% {left: 50%;}
+      95% {left: 120%;}
+      to {left: 100%;}
+    }
+  </style>
+</head>
+  <body>
+    <!--[if IE]>
+      <div class="pretty-message">
+        Internet Explorer is still installed in Windows 10 in order to maintain
+        compatibility with older websites and intranet sites that require
+        ActiveX and other Microsoft legacy web technologies.
+        [<a href="https://blogs.msdn.microsoft.com/ie/2015/01/22/project-spartan-and-the-windows-10-january-preview-build/">source</a>]
+        <br />
+        <br />
+        <%= htmlWebpackPlugin.options.title %> uses none of those! So feel free to use any other cool
+        <a href="https://browsehappy.com/">modern browser</a>.
+      <div>
+    <![endif]-->
+    <!--[if !IE]> -->
+      <!-- Application content here -->
+      <div id="app" class="loader"></div>
+    <!-- <![endif]-->
+    <!-- Just a reminder to enable JavaScript -->
+    <noscript>
+      <style type="text/css">
+        /* Disable the Loading... */
+        #app {
+          display: none;
+        }
+      </style>
+      <div class="pretty-message">
+        For full functionality of this app it is necessary to enable JavaScript.
+        Here are the <a href="http://www.enable-javascript.com/" target="_blank">
+        instructions</a> on how to enable JavaScript in your web browser.
+      <div>
+    </noscript>
+  </body>
+</html>
