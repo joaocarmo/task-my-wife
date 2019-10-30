@@ -5,6 +5,7 @@ const logger = require('morgan')
 const fallback = require('express-history-api-fallback')
 const authRouter = require('./routes/authenticate')
 const usersRouter = require('./routes/users')
+const projectsRouter = require('./routes/projects')
 
 const rootPath = path.join(__dirname, 'public')
 const indexFile = 'index.html'
@@ -19,6 +20,7 @@ app.use(cookieParser())
 app.use(express.static(rootPath))
 app.use('/auth', authRouter)
 app.use('/users', usersRouter)
+app.use('/projects', projectsRouter)
 app.use(fallback(indexFile, { root: rootPath }))
 
 module.exports = app

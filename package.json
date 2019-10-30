@@ -26,7 +26,7 @@
     "eslint-plugin-react-hooks": "^1.7.0"
   },
   "scripts": {
-    "start": "NODE_ENV=development node ./bin/www",
+    "start": "NODE_ENV=development DEBUG=task-my-wife:* node ./bin/www",
     "test": "jest --passWithNoTests"
   },
   "repository": {
