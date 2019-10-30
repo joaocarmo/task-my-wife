@@ -1,25 +1,19 @@
 const express = require('express')
 const sha256 = require('sha256')
 const db = require('../database.js')
-
-const responseMsg = ({
-  status = 'success',
-  message = '',
-  data = [],
-}) => ({
-  status: ['success', 'error'].includes(status.toLocaleLowerCase()) ? status : 'success',
-  message: typeof message === 'string' ? message : '',
-  data: Array.isArray(data) ? data : [data],
-})
+const responseMsg = require('./response-message.js')
 
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  const sql = 'select id, name, email from user'
+  const sql = 'SELECT id, name, email FROM user'
   const params = []
   db.all(sql, params, (err, rows) => {
     if (err) {
-      res.status(400).json({ error: err.message })
+      res.status(400).json(responseMsg({
+        status: 'error',
+        message: err.message,
+      }))
       return
     }
     res.json(responseMsg({ data: rows }))
@@ -27,11 +21,14 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-  const sql = 'select id, name, email from user where id = ?'
+  const sql = 'SELECT id, name, email FROM user WHERE id = ?'
   const params = [req.params.id]
   db.get(sql, params, (err, row) => {
     if (err) {
-      res.status(400).json({ error: err.message })
+      res.status(400).json(responseMsg({
+        status: 'error',
+        message: err.message,
+      }))
       return
     }
     res.json(responseMsg({ data: row }))
@@ -47,7 +44,10 @@ router.post('/', (req, res) => {
     errors.push('No email specified')
   }
   if (errors.length) {
-    res.status(400).json({ error: errors.join(',') })
+    res.status(400).json(responseMsg({
+      status: 'error',
+      message: errors.join(','),
+    }))
     return
   }
   const data = {
@@ -59,7 +59,10 @@ router.post('/', (req, res) => {
   const params = [data.name, data.email, data.password]
   db.run(sql, params, (err) => {
     if (err) {
-      res.status(400).json({ error: err.message })
+      res.status(400).json(responseMsg({
+        status: 'error',
+        message: err.message,
+      }))
       return
     }
     res.json(responseMsg({
@@ -75,7 +78,7 @@ router.patch('/:id', (req, res) => {
     password: req.body.password ? sha256(req.body.password) : null,
   }
   db.run(
-    `UPDATE user set
+    `UPDATE user SET
            name = COALESCE(?,name),
            email = COALESCE(?,email),
            password = COALESCE(?,password)
@@ -83,10 +86,18 @@ router.patch('/:id', (req, res) => {
     [data.name, data.email, data.password, req.params.id],
     (err) => {
       if (err) {
-        res.status(400).json({ error: res.message })
+        res.status(400).json(responseMsg({
+          status: 'error',
+          message: res.message,
+        }))
         return
       }
-      res.json(responseMsg({ data }))
+      const resData = {
+        id: req.params.id,
+        name: data.name,
+        email: data.email,
+      }
+      res.json(responseMsg({ data: resData }))
     },
   )
 })
@@ -97,7 +108,10 @@ router.delete('/:id', (req, res) => {
     req.params.id,
     (err) => {
       if (err) {
-        res.status(400).json({ error: res.message })
+        res.status(400).json(responseMsg({
+          status: 'error',
+          message: res.message,
+        }))
         return
       }
       res.json(responseMsg())
