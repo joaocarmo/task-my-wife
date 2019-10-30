@@ -79,10 +79,10 @@ router.patch('/:id', (req, res) => {
   }
   db.run(
     `UPDATE user SET
-           name = COALESCE(?,name),
-           email = COALESCE(?,email),
-           password = COALESCE(?,password)
-           WHERE id = ?`,
+      name = COALESCE(?,name),
+      email = COALESCE(?,email),
+      password = COALESCE(?,password)
+      WHERE id = ?`,
     [data.name, data.email, data.password, req.params.id],
     (err) => {
       if (err) {

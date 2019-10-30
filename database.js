@@ -24,8 +24,8 @@ description text,
 user INTEGER,
 project INTEGER,
 complete INTEGER,
-created date,
-deadline date
+created INTEGER,
+deadline INTEGER
 )`
 
 const handleUserTableExists = (db) => (error) => {
