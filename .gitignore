@@ -62,3 +62,6 @@ typings/
 
 # database
 db.sqlite
+
+# macOS minions
+.DS_Store
