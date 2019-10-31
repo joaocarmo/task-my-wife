@@ -3,20 +3,21 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { AuthContext } from './auth-context'
 import LoginForm from './login-form'
+import { getAuthUserFromLS, setAuthUserToLS } from '../storage'
 
 class Authentication extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      authUser: {},
+      authUser: getAuthUserFromLS() || {},
     }
 
     this.handleSetAuthUser = this.handleSetAuthUser.bind(this)
   }
 
   handleSetAuthUser(authUser) {
-    this.setState({ authUser })
+    this.setState({ authUser }, () => setAuthUserToLS({ authUser }))
   }
 
   render() {
