@@ -37,6 +37,9 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const errors = []
+  if (!req.body.name) {
+    errors.push('No name specified')
+  }
   if (!req.body.password) {
     errors.push('No password specified')
   }

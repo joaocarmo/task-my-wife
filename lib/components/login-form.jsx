@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import {
   Button, Form, Grid, Header, Message, Segment,
 } from 'semantic-ui-react'
-import { authenticateUser } from '../actions'
+import { authenticateUser, createUser } from '../actions'
 
 const buttonAsLink = {
   background: 'none',
@@ -17,17 +17,27 @@ const buttonAsLink = {
 }
 
 const LoginForm = ({ setAuthUser }) => {
+  const [page, setPage] = useState('login')
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState(false)
+  const [error, setError] = useState('')
 
   const authenticate = async () => {
-    const authUser = await authenticateUser(email, password)
-    console.log(authUser)
+    const { authUser, errorMsg } = await authenticateUser({ email, password })
     if (authUser) {
       setAuthUser(authUser)
     } else {
-      setError(true)
+      setError(errorMsg)
+    }
+  }
+
+  const create = async () => {
+    const { authUser, errorMsg } = await createUser({ name, email, password })
+    if (authUser) {
+      setAuthUser(authUser)
+    } else {
+      setError(errorMsg)
     }
   }
 
@@ -35,13 +45,27 @@ const LoginForm = ({ setAuthUser }) => {
     <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h2" color="teal" textAlign="center">
-          Login to your account
+          {
+            page === 'login'
+              ? 'Login to your account'
+              : 'Create a new account'
+          }
         </Header>
         <Form size="large">
           <Segment stacked>
+            {page === 'create' && (
+              <Form.Input
+                fluid
+                icon="user"
+                iconPosition="left"
+                placeholder="Name"
+                value={name}
+                onChange={(e, { value }) => { setName(value); setError(false) }}
+              />
+            )}
             <Form.Input
               fluid
-              icon="user"
+              icon="at"
               iconPosition="left"
               placeholder="E-mail"
               value={email}
@@ -61,23 +85,41 @@ const LoginForm = ({ setAuthUser }) => {
               color="teal"
               fluid
               size="large"
-              onClick={() => authenticate()}
+              onClick={() => (page === 'login' ? authenticate() : create())}
             >
-              Login
+              {
+                page === 'login'
+                  ? 'Login'
+                  : 'Create'
+              }
             </Button>
             {error && (
               <Message
                 negative
-                content="There was a problem. Please, try again."
+                content={`There was a problem: ${error}. Please, try again.`}
               />
             )}
           </Segment>
         </Form>
         <Message>
-          Don&apos;t have an account ?
-          {' '}
-          <button type="button" style={buttonAsLink}>
-            Create One
+          {
+            page === 'login'
+              ? 'Don\'t have an account ? '
+              : 'Already have an account ? '
+          }
+          <button
+            type="button"
+            style={buttonAsLink}
+            onClick={() => {
+              setPage(page === 'login' ? 'create' : 'login')
+              setError(false)
+            }}
+          >
+            {
+              page === 'login'
+                ? 'Create One'
+                : 'Login'
+            }
           </button>
           {' '}
           now !

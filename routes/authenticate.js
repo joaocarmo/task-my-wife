@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
   if (errors.length) {
     res.status(400).json(responseMsg({
       status: 'error',
-      message: errors.join(','),
+      message: errors.join(', '),
     }))
     return
   }

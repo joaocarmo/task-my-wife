@@ -8,6 +8,7 @@ const usersRouter = require('./routes/users')
 const projectsRouter = require('./routes/projects')
 const tasksRouter = require('./routes/tasks')
 
+const apiVersion = '/api/v1'
 const rootPath = path.join(__dirname, 'public')
 const indexFile = 'index.html'
 const app = express()
@@ -19,10 +20,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(rootPath))
-app.use('/auth', authRouter)
-app.use('/users', usersRouter)
-app.use('/projects', projectsRouter)
-app.use('/tasks', tasksRouter)
+app.use(`${apiVersion}/auth`, authRouter)
+app.use(`${apiVersion}/users`, usersRouter)
+app.use(`${apiVersion}/projects`, projectsRouter)
+app.use(`${apiVersion}/tasks`, tasksRouter)
 app.use(fallback(indexFile, { root: rootPath }))
 
 module.exports = app

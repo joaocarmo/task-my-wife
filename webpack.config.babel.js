@@ -12,6 +12,7 @@ const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development
 const styleLoader = mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader'
 const libFolder = path.join(__dirname, 'lib')
 const distFolder = path.join(__dirname, 'public')
+const webApiHost = 'http://localhost:5000'
 
 module.exports = {
   mode,
@@ -79,5 +80,8 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
+    proxy: {
+      '/api': webApiHost,
+    },
   },
 }
