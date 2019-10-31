@@ -11,7 +11,7 @@ Clone this repo and install the dependencies.
 $ npm install
 ```
 
-## Run the development server
+## Development
 
 You need to start the backend API and then the frontend server.
 
@@ -26,4 +26,10 @@ default.
 
 ```
 $ npm start
+```
+
+Run the tests with _Jest_.
+
+```
+$ npm test
 ```

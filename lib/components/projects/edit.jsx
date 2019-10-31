@@ -1,21 +1,18 @@
 // Imports
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
-  Button, Form, Message, Modal, Segment,
+  Button, Form, Message, Modal,
 } from 'semantic-ui-react'
-import { AuthContext } from '../auth-context'
-import { createProjectForUser } from '../../actions'
+import { editProject } from '../../actions'
 
-const NewProject = ({ fetchProjects }) => {
+const EditProject = ({ projectID, projectName, fetchProjects }) => {
   const [modalOpen, setModalOpen] = useState(false)
-  const [name, setName] = useState('')
+  const [name, setName] = useState(projectName)
   const [error, setError] = useState('')
 
-  const { authUser: { id: userID = '' } = {} } = useContext(AuthContext)
-
-  const createProject = async () => {
-    const { errorMsg } = await createProjectForUser({ userID, name })
+  const modifyProject = async () => {
+    const { errorMsg } = await editProject({ projectID, name })
     if (errorMsg) {
       setError(errorMsg)
     } else {
@@ -24,26 +21,24 @@ const NewProject = ({ fetchProjects }) => {
   }
 
   useEffect(() => {
-    setName('')
+    setName(projectName)
     setError('')
   }, [modalOpen])
 
   return (
     <>
-      <Segment basic clearing>
-        <Button
-          floated="right"
-          icon="plus"
-          content="New Project"
-          color="green"
-          onClick={() => setModalOpen(!modalOpen)}
-        />
-      </Segment>
+      <Button
+        icon="pencil"
+        color="yellow"
+        size="mini"
+        basic
+        onClick={() => setModalOpen(!modalOpen)}
+      />
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(!modalOpen)}
       >
-        <Modal.Header>Add New Project</Modal.Header>
+        <Modal.Header>{`Edit Project # ${projectID}`}</Modal.Header>
         <Modal.Content>
           <Modal.Description>
             {error && (
@@ -77,7 +72,7 @@ const NewProject = ({ fetchProjects }) => {
               if (!name) {
                 setError('A project name is required!')
               } else {
-                createProject()
+                modifyProject()
               }
             }}
           />
@@ -87,8 +82,10 @@ const NewProject = ({ fetchProjects }) => {
   )
 }
 
-NewProject.propTypes = {
+EditProject.propTypes = {
+  projectID: PropTypes.number.isRequired,
+  projectName: PropTypes.string.isRequired,
   fetchProjects: PropTypes.func.isRequired,
 }
 
-export default NewProject
+export default EditProject

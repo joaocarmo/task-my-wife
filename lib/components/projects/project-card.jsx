@@ -4,13 +4,21 @@ import PropTypes from 'prop-types'
 import { Card } from 'semantic-ui-react'
 import DeleteProject from './delete'
 import ViewTasks from '../tasks/view'
+import EditProject from './edit'
 
 const ProjectCard = ({
   userID, project: { id, name }, fetchProjects,
 }) => (
   <Card>
     <Card.Content>
-      <Card.Header>{name}</Card.Header>
+      <Card.Header>
+        <EditProject
+          projectID={id}
+          projectName={name}
+          fetchProjects={fetchProjects}
+        />
+        {` ${name}`}
+      </Card.Header>
       <Card.Meta>{`Project ID # ${id}`}</Card.Meta>
       <Card.Description>
         <ViewTasks userID={userID} projectID={id} />
