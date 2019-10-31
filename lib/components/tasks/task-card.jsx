@@ -3,7 +3,7 @@ import moment from 'moment'
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Button, List } from 'semantic-ui-react'
-import { markTaskComplete } from '../../actions'
+import { markTaskComplete, deleteTask } from '../../actions'
 
 const TaskCard = ({
   task: {
@@ -11,16 +11,28 @@ const TaskCard = ({
   }, fetchTasks,
 }) => {
   const [isCompleting, setIsCompleting] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
 
   const completeTask = async () => {
     setIsCompleting(true)
     const { errorMsg } = await markTaskComplete({ taskID: id })
+    setIsCompleting(false)
     if (errorMsg) {
       console.log(errorMsg)
     } else {
       await fetchTasks()
     }
-    setIsCompleting(false)
+  }
+
+  const removeTask = async () => {
+    setIsDeleting(true)
+    const { errorMsg } = await deleteTask({ taskID: id })
+    setIsDeleting(false)
+    if (errorMsg) {
+      console.log(errorMsg)
+    } else {
+      await fetchTasks()
+    }
   }
 
   return (
@@ -36,7 +48,14 @@ const TaskCard = ({
               loading={isCompleting}
               disabled={isCompleting}
             />
-            <Button icon="trash" color="red" basic />
+            <Button
+              icon="trash"
+              color="red"
+              basic
+              onClick={() => removeTask()}
+              loading={isDeleting}
+              disabled={isDeleting}
+            />
           </Button.Group>
         </List.Content>
       )}
