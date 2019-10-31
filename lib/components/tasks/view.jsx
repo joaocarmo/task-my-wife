@@ -58,7 +58,7 @@ const ViewTasks = ({ userID, projectID }) => {
         </i>
       )}
       {data.length > 0 && (
-        <List>
+        <List verticalAlign="middle">
           {data.map((task) => (
             <TaskCard task={task} key={task.id} fetchTasks={fetchTasks} />
           ))}

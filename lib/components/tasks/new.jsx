@@ -20,7 +20,7 @@ const NewTask = ({ projectID, userID, fetchTasks }) => {
   const dateRegExp = /^20[0-9]{2}-[0-1]{1}[0-9]{1}-[0-3]{1}[0-9]{1}$/
 
   const createTask = async () => {
-    const parsedDeadline = moment(deadline, 'YYYY-MM-DD').toDate()
+    const parsedDeadline = moment.utc(deadline, 'YYYY-MM-DD').toDate()
     const { errorMsg } = await createTaskForProject({
       name, description, userID, projectID, deadline: parsedDeadline,
     })
