@@ -72,7 +72,7 @@ const ViewTasks = ({ userID, projectID }) => {
           ))}
         </List>
       )}
-      <div style={{ marginTop: '1.2em' }}>
+      <div style={{ marginTop: '2em', paddingLeft: '1.6em' }}>
         <NewTask
           userID={userID}
           projectID={projectID}

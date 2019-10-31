@@ -25,6 +25,7 @@ const DeleteProject = ({ projectID, fetchProjects }) => {
         basic
         color="red"
         content="Delete"
+        size="small"
         onClick={() => setModalOpen(!modalOpen)}
       />
       <Modal

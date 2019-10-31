@@ -12,19 +12,21 @@ const ProjectCard = ({
   <Card>
     <Card.Content>
       <Card.Header>
-        <EditProject
-          projectID={id}
-          projectName={name}
-          fetchProjects={fetchProjects}
-        />
-        {` ${name}`}
+        {name}
       </Card.Header>
       <Card.Meta>{`Project # ${id}`}</Card.Meta>
       <Card.Description>
-        <ViewTasks userID={userID} projectID={id} />
+        <div style={{ padding: '1.4em 0.2em' }}>
+          <ViewTasks userID={userID} projectID={id} />
+        </div>
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
+      <EditProject
+        projectID={id}
+        projectName={name}
+        fetchProjects={fetchProjects}
+      />
       <DeleteProject projectID={id} fetchProjects={fetchProjects} />
     </Card.Content>
   </Card>

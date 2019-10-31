@@ -28,10 +28,10 @@ const EditProject = ({ projectID, projectName, fetchProjects }) => {
   return (
     <>
       <Button
-        icon="pencil"
-        color="yellow"
-        size="mini"
         basic
+        color="yellow"
+        content="Edit"
+        size="small"
         onClick={() => setModalOpen(!modalOpen)}
       />
       <Modal
