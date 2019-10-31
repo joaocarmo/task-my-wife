@@ -5,10 +5,10 @@ import {
   Dimmer, List, Loader, Message,
 } from 'semantic-ui-react'
 import TaskCard from './task-card'
+import NewTask from './new'
 import { getTasksForProject } from '../../actions'
-import { buttonAsLink } from '../styles'
 
-const ViewTasks = ({ projectID }) => {
+const ViewTasks = ({ userID, projectID }) => {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
@@ -65,19 +65,18 @@ const ViewTasks = ({ projectID }) => {
         </List>
       )}
       <div style={{ marginTop: '1.2em' }}>
-        <button
-          type="button"
-          style={buttonAsLink}
-          onClick={() => {}}
-        >
-          Add Task
-        </button>
+        <NewTask
+          userID={userID}
+          projectID={projectID}
+          fetchTasks={fetchTasks}
+        />
       </div>
     </>
   )
 }
 
 ViewTasks.propTypes = {
+  userID: PropTypes.number.isRequired,
   projectID: PropTypes.number.isRequired,
 }
 

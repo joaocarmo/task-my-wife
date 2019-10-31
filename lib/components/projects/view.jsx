@@ -70,6 +70,7 @@ const ViewProjects = () => {
           <Card.Group>
             {data.map((project) => (
               <ProjectCard
+                userID={userID}
                 project={project}
                 fetchProjects={fetchProjects}
                 key={project.id}

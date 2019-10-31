@@ -6,14 +6,14 @@ import DeleteProject from './delete'
 import ViewTasks from '../tasks/view'
 
 const ProjectCard = ({
-  project: { id, name }, fetchProjects,
+  userID, project: { id, name }, fetchProjects,
 }) => (
   <Card>
     <Card.Content>
       <Card.Header>{name}</Card.Header>
       <Card.Meta>{`Project ID # ${id}`}</Card.Meta>
       <Card.Description>
-        <ViewTasks projectID={id} />
+        <ViewTasks userID={userID} projectID={id} />
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
@@ -23,6 +23,7 @@ const ProjectCard = ({
 )
 
 ProjectCard.propTypes = {
+  userID: PropTypes.number.isRequired,
   project: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,

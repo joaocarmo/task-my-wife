@@ -39,7 +39,10 @@ TaskCard.propTypes = {
     project: PropTypes.number,
     complete: PropTypes.number,
     created: PropTypes.number,
-    deadline: PropTypes.number,
+    deadline: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
   }).isRequired,
   fetchTasks: PropTypes.func.isRequired,
 }
