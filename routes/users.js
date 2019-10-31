@@ -60,7 +60,7 @@ router.post('/', (req, res) => {
   }
   const sql = 'INSERT INTO user (name, email, password) VALUES (?,?,?)'
   const params = [data.name, data.email, data.password]
-  db.run(sql, params, (err) => {
+  db.run(sql, params, function (err) {
     if (err) {
       res.status(400).json(responseMsg({
         status: 'error',
@@ -87,7 +87,7 @@ router.patch('/:id', (req, res) => {
       password = COALESCE(?,password)
       WHERE id = ?`,
     [data.name, data.email, data.password, req.params.id],
-    (err) => {
+    function (err) {
       if (err) {
         res.status(400).json(responseMsg({
           status: 'error',
@@ -109,7 +109,7 @@ router.delete('/:id', (req, res) => {
   db.run(
     'DELETE FROM user WHERE id = ?',
     req.params.id,
-    (err) => {
+    function (err) {
       if (err) {
         res.status(400).json(responseMsg({
           status: 'error',

@@ -79,7 +79,7 @@ router.post('/', (req, res) => {
     data.created,
     data.deadline,
   ]
-  db.run(sql, params, (err) => {
+  db.run(sql, params, function (err) {
     if (err) {
       res.status(400).json(responseMsg({
         status: 'error',
@@ -120,7 +120,7 @@ router.patch('/:id', (req, res) => {
       data.deadline,
       req.params.id,
     ],
-    (err) => {
+    function (err) {
       if (err) {
         res.status(400).json(responseMsg({
           status: 'error',
@@ -141,7 +141,7 @@ router.delete('/:id', (req, res) => {
   db.run(
     'DELETE FROM task WHERE id = ?',
     req.params.id,
-    (err) => {
+    function (err) {
       if (err) {
         res.status(400).json(responseMsg({
           status: 'error',

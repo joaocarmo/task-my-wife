@@ -14,9 +14,9 @@ const DeleteProject = ({ projectID, fetchProjects }) => {
     if (errorMsg) {
       console.log(errorMsg)
     } else {
+      setModalOpen(false)
       await fetchProjects()
     }
-    setModalOpen(false)
   }
 
   return (
