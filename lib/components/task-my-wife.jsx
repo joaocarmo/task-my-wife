@@ -1,10 +1,11 @@
 // Imports
 import React from 'react'
+import Authentication from './auth-provider'
 
 const TaskMyWife = () => (
-  <div>
+  <Authentication>
     Hello, there !
-  </div>
+  </Authentication>
 )
 
 export default TaskMyWife
