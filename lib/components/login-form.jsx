@@ -5,16 +5,7 @@ import {
   Button, Form, Grid, Header, Message, Segment,
 } from 'semantic-ui-react'
 import { authenticateUser, createUser } from '../actions'
-
-const buttonAsLink = {
-  background: 'none',
-  border: 'none',
-  padding: 0,
-  fontFamily: 'arial, sans-serif',
-  color: '#069',
-  textDecoration: 'underline',
-  cursor: 'pointer',
-}
+import { buttonAsLink } from './styles'
 
 const LoginForm = ({ setAuthUser }) => {
   const [page, setPage] = useState('login')

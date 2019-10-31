@@ -3,6 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Card } from 'semantic-ui-react'
 import DeleteProject from './delete'
+import ViewTasks from '../tasks/view'
 
 const ProjectCard = ({
   project: { id, name }, fetchProjects,
@@ -12,7 +13,7 @@ const ProjectCard = ({
       <Card.Header>{name}</Card.Header>
       <Card.Meta>{`Project ID # ${id}`}</Card.Meta>
       <Card.Description>
-        Stuff
+        <ViewTasks projectID={id} />
       </Card.Description>
     </Card.Content>
     <Card.Content extra>

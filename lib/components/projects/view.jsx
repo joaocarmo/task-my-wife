@@ -66,7 +66,7 @@ const ViewProjects = () => {
             content="It looks like you don't have projects yet. Create your first!"
           />
         )}
-        {data.length && (
+        {data.length > 0 && (
           <Card.Group>
             {data.map((project) => (
               <ProjectCard
