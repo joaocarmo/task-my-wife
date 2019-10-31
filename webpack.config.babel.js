@@ -83,5 +83,10 @@ module.exports = {
     proxy: {
       '/api': webApiHost,
     },
+    stats: 'errors-only',
+    overlay: {
+      warnings: true,
+      errors: true,
+    },
   },
 }

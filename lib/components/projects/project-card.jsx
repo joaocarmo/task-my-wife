@@ -19,7 +19,7 @@ const ProjectCard = ({
         />
         {` ${name}`}
       </Card.Header>
-      <Card.Meta>{`Project ID # ${id}`}</Card.Meta>
+      <Card.Meta>{`Project # ${id}`}</Card.Meta>
       <Card.Description>
         <ViewTasks userID={userID} projectID={id} />
       </Card.Description>

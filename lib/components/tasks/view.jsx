@@ -1,4 +1,5 @@
 // Imports
+import moment from 'moment'
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
@@ -13,11 +14,18 @@ const ViewTasks = ({ userID, projectID }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
+  const sortTasks = true
+
   const fetchTasks = async () => {
     setIsLoading(true)
     const { data: newData, errorMsg } = await getTasksForProject({ projectID })
     if (errorMsg) {
       setError(errorMsg)
+    } else if (sortTasks) {
+      const sortedData = newData.sort(
+        ({ deadline: a }, { deadline: b }) => moment.utc(a).diff(moment.utc(b)),
+      )
+      setData(sortedData)
     } else {
       setData(newData)
     }
